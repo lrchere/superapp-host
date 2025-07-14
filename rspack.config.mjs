@@ -36,7 +36,8 @@ export default env => {
         name: 'SuperAppHost',
         filename: 'SuperAppHost.container.js.bundle',
         remotes: {
-          MiniApp: `MiniAppTemplate@http://localhost:9001/${platform}/mf-manifest.json`,
+          CreditCardMiniApp: `CreditCardMiniApp@http://localhost:9001/${platform}/mf-manifest.json`,
+          CreditMiniApp: `CreditMiniApp@http://localhost:9002/${platform}/mf-manifest.json`,
         },
         dts: false,
         shared: {

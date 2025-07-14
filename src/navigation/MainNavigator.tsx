@@ -3,12 +3,14 @@ import {
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
 import React from 'react';
-import MiniAppGreenScreen from '../screens/MiniAppGreenScreen';
 import HomeScreen from '../screens/HomeScreen';
+import MiniAppCreditCardScreen from '../screens/MiniAppCreditCardScreen';
+import MiniAppCreditScreen from '../screens/MiniAppCreditScreen';
 
 export type MainNavigatorParamList = {
   Home: undefined;
-  MiniAppGreen: undefined;
+  MiniAppCreditCard: undefined;
+  MiniAppCredit: undefined;
 };
 
 export type MainStackNavigationProp =
@@ -24,7 +26,11 @@ const MainNavigator = () => {
         name="Home"
         component={HomeScreen}
       />
-      <Stack.Screen name="MiniAppGreen" component={MiniAppGreenScreen} />
+      <Stack.Screen
+        name="MiniAppCreditCard"
+        component={MiniAppCreditCardScreen}
+      />
+      <Stack.Screen name="MiniAppCredit" component={MiniAppCreditScreen} />
     </Stack.Navigator>
   );
 };
