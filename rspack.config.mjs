@@ -1,6 +1,7 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as Repack from '@callstack/repack';
+import rspack from '@rspack/core';
 
 /** @type {(env: import('@callstack/repack').EnvOptions) => import('@rspack/core').Configuration} */
 
@@ -16,6 +17,8 @@ const __dirname = path.dirname(__filename);
 
 export default env => {
   const { mode, context, platform } = env;
+
+  const serverUrl = 'https://production-url.prd';
 
   return {
     mode,
@@ -36,8 +39,12 @@ export default env => {
         name: 'SuperAppHost',
         filename: 'SuperAppHost.container.js.bundle',
         remotes: {
-          CreditCardMiniApp: `CreditCardMiniApp@http://localhost:9001/${platform}/mf-manifest.json`,
-          CreditMiniApp: `CreditMiniApp@http://localhost:9002/${platform}/mf-manifest.json`,
+          CreditCardMiniApp: `CreditCardMiniApp@${
+            mode === 'production' ? serverUrl : 'http://localhost:9001'
+          }/${platform}/mf-manifest.json`,
+          CreditMiniApp: `CreditMiniApp@${
+            mode === 'production' ? serverUrl : 'http://localhost:9002'
+          }/${platform}/mf-manifest.json`,
         },
         dts: false,
         shared: {
@@ -79,7 +86,15 @@ export default env => {
             requiredVersion: '^2.5.2',
             version: '2.5.2',
           },
+          '@react-native-async-storage/async-storage': {
+            singleton: true,
+            eager: true,
+            requiredVersion: '^2.2.0',
+          },
         },
+      }),
+      new rspack.IgnorePlugin({
+        resourceRegExp: /^@react-native-masked-view/,
       }),
     ],
   };
