@@ -2,6 +2,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as Repack from '@callstack/repack';
 import rspack from '@rspack/core';
+import dotenv from 'dotenv';
 
 /** @type {(env: import('@callstack/repack').EnvOptions) => import('@rspack/core').Configuration} */
 
@@ -18,7 +19,10 @@ const __dirname = path.dirname(__filename);
 export default env => {
   const { mode, context, platform } = env;
 
-  const serverUrl = 'https://production-url.prd';
+  // Load environment variables based on the mode
+  const envFile = path.resolve(__dirname, `env/.env.${mode}`);
+  dotenv.config({ path: envFile });
+  console.log(`Loading environment variables (mode: ${mode}) from: ${envFile}`);
 
   return {
     mode,
@@ -39,12 +43,8 @@ export default env => {
         name: 'SuperAppHost',
         filename: 'SuperAppHost.container.js.bundle',
         remotes: {
-          CreditCardMiniApp: `CreditCardMiniApp@${
-            mode === 'production' ? serverUrl : 'http://localhost:9001'
-          }/${platform}/mf-manifest.json`,
-          CreditMiniApp: `CreditMiniApp@${
-            mode === 'production' ? serverUrl : 'http://localhost:9002'
-          }/${platform}/mf-manifest.json`,
+          CreditCardMiniApp: `CreditCardMiniApp@${process.env.CREDIT_CARD_MINI_APP_URL}/${platform}/mf-manifest.json`,
+          CreditMiniApp: `CreditMiniApp@${process.env.CREDIT_MINI_APP_URL}/${platform}/mf-manifest.json`,
         },
         dts: false,
         shared: {

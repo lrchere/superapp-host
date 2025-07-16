@@ -5273,6 +5273,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dotenv@npm:^17.2.0":
+  version: 17.2.0
+  resolution: "dotenv@npm:17.2.0"
+  checksum: 389d25dac7afeb1890bcd113c84d8d8175e95967559e90b8a6c8dc19bfc81ad3ede0036873c459cd8de1f90055a88232ddf74c550bcd2ea7a94b8d570f116470
+  languageName: node
+  linkType: hard
+
 "dunder-proto@npm:^1.0.0, dunder-proto@npm:^1.0.1":
   version: 1.0.1
   resolution: "dunder-proto@npm:1.0.1"
@@ -11098,6 +11105,7 @@ __metadata:
     "@types/jest": ^29.5.13
     "@types/react": ^19.1.0
     "@types/react-test-renderer": ^19.1.0
+    dotenv: ^17.2.0
     eslint: ^8.19.0
     jest: ^29.6.3
     prettier: 2.8.8
