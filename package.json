@@ -52,6 +52,11 @@
     "jsSrcsDir": "specs",
     "android": {
       "javaPackageName": "com.superapphost"
+    },
+    "ios": {
+      "modulesProvider": {
+        "NativeLocalStorage": "RCTNativeLocalStorage"
+      }
     }
   },
   "packageManager": "yarn@3.6.4"

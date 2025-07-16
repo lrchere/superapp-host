@@ -64,8 +64,7 @@ const HomeScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginTop: 8,
+    margin: 8,
   },
   text: {
     fontSize: 16,
