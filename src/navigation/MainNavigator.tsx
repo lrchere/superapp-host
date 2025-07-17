@@ -6,11 +6,13 @@ import React from 'react';
 import HomeScreen from '../screens/HomeScreen';
 import MiniAppCreditCardScreen from '../screens/MiniAppCreditCardScreen';
 import MiniAppCreditScreen from '../screens/MiniAppCreditScreen';
+import NativeNumberStorageScreen from '../screens/NativeNumberStorageScreen';
 
 export type MainNavigatorParamList = {
   Home: undefined;
   MiniAppCreditCard: undefined;
   MiniAppCredit: undefined;
+  NativeNumberStorage: undefined;
 };
 
 export type MainStackNavigationProp =
@@ -31,6 +33,11 @@ const MainNavigator = () => {
         component={MiniAppCreditCardScreen}
       />
       <Stack.Screen name="MiniAppCredit" component={MiniAppCreditScreen} />
+      <Stack.Screen
+        options={{ headerShown: true }}
+        name="NativeNumberStorage"
+        component={NativeNumberStorageScreen}
+      />
     </Stack.Navigator>
   );
 };

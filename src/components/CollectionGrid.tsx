@@ -15,19 +15,19 @@ import {
 
 const numColumns = 2;
 const screenWidth = Dimensions.get('window').width;
-const itemSize = (screenWidth - 4 * (numColumns * 2) - 8) / numColumns;
+const itemSize = (screenWidth - 4 * (numColumns * 2) - 16) / numColumns;
 
 const CollectionGrid = ({
-  miniApps,
+  features: features,
 }: {
-  miniApps: Array<{ key: string; label: string; description?: string }>;
+  features: Array<{ key: string; label: string; description?: string }>;
 }) => {
   const navigation = useNavigation<MainStackNavigationProp>();
 
   return (
     <FlatList
       contentContainerStyle={styles.container}
-      data={miniApps}
+      data={features}
       keyExtractor={item => item.key}
       scrollEnabled={false}
       numColumns={numColumns}
@@ -51,11 +51,12 @@ const CollectionGrid = ({
 
 const styles = StyleSheet.create({
   container: {
-    margin: 4,
+    margin: 8,
   },
   item: {
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 8,
     margin: 4,
     borderRadius: 8,
     backgroundColor: '#fff',

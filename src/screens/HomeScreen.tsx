@@ -1,40 +1,18 @@
-import { View, StyleSheet, Text, TextInput, Button } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import React from 'react';
 import CollectionGrid from '../components/CollectionGrid';
-
-import NativeLocalStorage from '../../specs/NativeLocalStorage';
-
-const EMPTY = '<empty>';
+import { useNavigation } from '@react-navigation/native';
+import { MainStackNavigationProp } from '../navigation/MainNavigator';
 
 const HomeScreen = () => {
-  const [value, setValue] = React.useState<string | null>(null);
-
-  const [editingValue, setEditingValue] = React.useState<string | null>(null);
-
-  React.useEffect(() => {
-    const storedValue = NativeLocalStorage?.getItem('myKey');
-    setValue(storedValue ?? '');
-  }, []);
-
-  function saveValue() {
-    NativeLocalStorage?.setItem(editingValue ?? EMPTY, 'myKey');
-    setValue(editingValue);
-  }
-
-  function clearAll() {
-    NativeLocalStorage?.clear();
-    setValue('');
-  }
-
-  function deleteValue() {
-    NativeLocalStorage?.removeItem('myKey');
-    setValue('');
-  }
+  const navigation = useNavigation<MainStackNavigationProp>();
 
   return (
-    <View style={styles.container}>
+    <View>
+      <Text style={styles.sectionTitle}>Mini Apps</Text>
+
       <CollectionGrid
-        miniApps={[
+        features={[
           {
             key: 'MiniAppCreditCard',
             label: 'Credit Card Mini App',
@@ -47,35 +25,31 @@ const HomeScreen = () => {
           },
         ]}
       />
-      <Text style={styles.text}>
-        Current stored value is: {value ?? 'No Value'}
-      </Text>
-      <TextInput
-        placeholder="Enter the text you want to store"
-        style={styles.textInput}
-        onChangeText={setEditingValue}
+
+      <Text style={styles.sectionTitle}>Native Features</Text>
+      <CollectionGrid
+        features={[
+          {
+            key: 'NativeNumberStorage',
+            label: 'Native Number Storage',
+            description: 'Store and retrieve numbers using native storage',
+          },
+        ]}
       />
-      <Button title="Save" onPress={saveValue} />
-      <Button title="Delete" onPress={deleteValue} />
-      <Button title="Clear" onPress={clearAll} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    margin: 8,
+  sectionTitle: {
+    margin: 16,
+    marginBottom: 8,
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   text: {
     fontSize: 16,
     margin: 8,
-  },
-  textInput: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    margin: 8,
-    paddingHorizontal: 8,
   },
 });
 
